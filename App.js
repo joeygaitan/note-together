@@ -34,7 +34,6 @@ export default class App extends Component{
           isLoading: false,
           dataSource: responseJson,
         })
-        console.log(this.state.dataSource)
       })
       .catch((error) =>{
         console.error(error);
@@ -55,10 +54,7 @@ export default class App extends Component{
         <FlatList
           data={this.state.dataSource}
           renderItem={({item}) => 
-          <ListItem
-          title={item.header}
-          subtitle={item.desc}
-          />
+          <Text>{item.desc}, {item.header}</Text>
         }
           keyExtractor={({id}, index) => id}
         />
