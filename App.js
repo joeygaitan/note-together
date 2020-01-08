@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button, FlatList, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, ScrollView, ActivityIndicator,ListItem } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,17 +22,19 @@ export default class App extends Component{
   }
 
   componentDidMount(){
-    return fetch('https://facebook.github.io/react-native/movies.json')
+    this.getPosts()
+  }
+
+  getPosts = async () =>{
+    return fetch(`https://polar-dawn-63323.herokuapp.com/blogs`)
       .then((response) => response.json())
       .then((responseJson) => {
-
+        console.log("here",responseJson)
         this.setState({
           isLoading: false,
-          dataSource: responseJson.movies,
-        }, function(){
-
-        });
-
+          dataSource: responseJson,
+        })
+        console.log(this.state.dataSource)
       })
       .catch((error) =>{
         console.error(error);
@@ -40,6 +42,7 @@ export default class App extends Component{
   }
 
   render(){ 
+    console.log(this.state)
     if(this.state.isLoading){
       return(
         <View style={{flex: 1, padding: 20}}>
@@ -51,12 +54,12 @@ export default class App extends Component{
         <View style={{flex: 1, paddingTop:20}}>
         <FlatList
           data={this.state.dataSource}
-          renderItem={({item})=> <Text>{item.title}, {item.releaseYear}</Text>}
-          keyExtractor={({id},index)=>id}
-        />
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({item}) => <Text>{item.title}, {item.releaseYear}</Text>}
+          renderItem={({item}) => 
+          <ListItem
+          title={item.header}
+          subtitle={item.desc}
+          />
+        }
           keyExtractor={({id}, index) => id}
         />
       </View>
