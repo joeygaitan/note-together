@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, FlatList, ScrollView, ActivityIndicator,ListItem } from 'react-native';
+import Notes from './components/Notes/Notes';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,10 +23,10 @@ export default class App extends Component{
   }
 
   componentDidMount(){
-    this.getPosts()
+    this.getNotes()
   }
 
-  getPosts = async () =>{
+  getNotes = async () =>{
     return fetch(`https://polar-dawn-63323.herokuapp.com/blogs`)
       .then((response) => response.json())
       .then((responseJson) => {
@@ -40,28 +41,22 @@ export default class App extends Component{
       });
   }
 
+  getNote = async () =>{
+
+  }
+
+  addNote = async () =>{
+
+  }
+
+  updateNote = async () =>{
+
+  }
+
+  deletePost
+
   render(){ 
-    console.log(this.state)
-    if(this.state.isLoading){
-      return(
-        <View style={{flex: 1, padding: 20}}>
-          <ActivityIndicator/>
-        </View>
-      )
-    } else{
-      return (
-        <View style={{flex: 1, paddingTop:20}}>
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({item}) => 
-          <Text>{item.desc}, {item.header}</Text>
-        }
-          keyExtractor={({id}, index) => id}
-        />
-      </View>
- 
-      )
-    }
+    <Notes notes={this.state.dataSource}/>
   }
 }
 
