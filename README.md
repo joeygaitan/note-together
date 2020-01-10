@@ -10,5 +10,6 @@
 npm install
 ```
 5. After install then run this command
-6. npm start
-7.  
+```
+npm start
+```
