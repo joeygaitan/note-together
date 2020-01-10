@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button,Text,View } from 'react-native';
 
 class Note extends Component{
-    constructor(){
+    constructor(props){
         super(props);
 
         this.state = {
@@ -12,16 +12,16 @@ class Note extends Component{
     }
 
     componentDidMount(){
-
+        this.getNote()
     }
 
     getNote = () => {
-        const id = this.props.match.params.id
-
-        return fetch(`https://polar-dawn-63323.herokuapp.com/blogs${id}`)
+        const id = this.props.match.params.id;
+        console.log(`https://polar-dawn-63323.herokuapp.com/blogs/${id}`)
+        return fetch(`https://polar-dawn-63323.herokuapp.com/blogs/${id}`)
         .then((response) => response.json())
         .then((responseData)=>{
-            const note = responseData.data;
+            const note = responseData;
             this.setState({note, open: false})
         })
         .catch((error)=>{
@@ -35,6 +35,7 @@ class Note extends Component{
     }
 
     render(){
+        console.log(this.state.note, this.props.match.params.id)
         return (
             <View>
                 <Text>Title</Text>
