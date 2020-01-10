@@ -66,13 +66,13 @@ export default class App extends Component{
 
   updateNote = async (id,note) => {
     return fetch(`https://polar-dawn-63323.herokuapp.com/blogs/${id}`,{
-    method: 'POST', headers: {
+    method: 'PUT', headers: {
        Accept: 'application/json',
       'Content-Type': 'application/json'
     },body: JSON.stringify(note)})
     .then((response) => response.json())
     .then((responseJson)=>{
-      this.getNotes
+      this.getNotes()
     })
     .catch((error)=>{
       console.error(error);
@@ -89,7 +89,7 @@ export default class App extends Component{
     })
     .then((response) => response.json())
     .then((responseJson)=>{
-      this.getNotes
+      this.getNotes()
     })
     .catch((error)=>{
       console.error(error);
