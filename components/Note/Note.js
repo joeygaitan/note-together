@@ -73,6 +73,7 @@ class Note extends Component{
             value={this.state.text}
             />
             <Button style={{height: 40,paddingTop:30,paddingLeft:20}}title={"Done"}onPress={this.onDone}/>
+            <Button style={{height: 40,paddingTop:30,paddingLeft:20}}title={"Delete"}onPress={this.onDone}/>
             </View>
             );
     }
