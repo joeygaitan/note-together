@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
-import { Button,Text,View } from 'react-native';
+import { Button,Text,View,TextInput,StyleSheet } from 'react-native';
+import {DoubleClick} from 'react-native-double-tap';
+
+const styles = StyleSheet.create({
+    container: {
+       paddingTop: 23
+    },
+    header:{
+
+    },
+    description: {
+        
+    },
+    submitButton:{
+
+    }
+})
 
 class Note extends Component{
     constructor(props){
         super(props);
 
         this.state = {
-            note: {},
-            open: false
+                    header:"",
+                    desc:""
         }
     }
+
+    
 
     componentDidMount(){
         this.getNote()
@@ -17,12 +35,11 @@ class Note extends Component{
 
     getNote = () => {
         const id = this.props.match.params.id;
-        console.log(`https://polar-dawn-63323.herokuapp.com/blogs/${id}`)
         return fetch(`https://polar-dawn-63323.herokuapp.com/blogs/${id}`)
         .then((response) => response.json())
         .then((responseData)=>{
             const note = responseData;
-            this.setState({note, open: false})
+            this.setState({header:note.header,desc:note.desc})
         })
         .catch((error)=>{
             console.log(error)
@@ -34,14 +51,30 @@ class Note extends Component{
         this.props.history.push('/')
     }
 
+    onDone = () => {
+        const id = this.props.match.params.id;
+            this.props.update(id,{header:this.state.header,desc:this.state.desc})
+            this.props.history.push('/')
+    }
+
     render(){
-        console.log(this.state.note, this.props.match.params.id)
         return (
-            <View>
-                <Text>Title</Text>
-                <Text>Body</Text>
+        <View style={styles}> 
+            <TextInput
+            style={{height: 40,paddingTop:50}}
+            placeholder={this.state.header}
+            onChangeText={(text) => this.setState({header: text})}
+            value={this.state.text}
+            />
+            <TextInput
+            style={{height: 40}}
+            placeholder={this.state.desc}
+            onChangeText={(text) => this.setState({desc: text})}
+            value={this.state.text}
+            />
+            <Button title={"Done"}onPress={this.onDone}/>
             </View>
-        );
+            );
     }
 }
 

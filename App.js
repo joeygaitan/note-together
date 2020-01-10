@@ -6,6 +6,8 @@ import { NativeRouter, Route, Link } from "react-router-native";
 //components
 import Notes from './components/Notes/Notes';
 import Note from './components/Note/Note.js';
+import Navbar from './components/Navbar/Navbar';
+import Add from './components/NewNote/Add';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +37,6 @@ export default class App extends Component{
     return fetch(`https://polar-dawn-63323.herokuapp.com/blogs`)
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log("here",responseJson)
         this.setState({
           isLoading: false,
           dataSource: responseJson,
@@ -47,9 +48,12 @@ export default class App extends Component{
   }
 
   addNote = async (note) => {
+    console.log("here",note)
     return fetch(`https://polar-dawn-63323.herokuapp.com/blogs`,note)
     .then((response) => response.json())
       .then((responseJson) => {
+        console.log("inside the post request",responseJson);
+        
         this.getNotes()
       })
       .catch((error) =>{
@@ -58,7 +62,7 @@ export default class App extends Component{
   }
 
   updateNote = async (id,note) => {
-    return fetch(`https://polar-dawn-63323.herokuapp.com/blogs${id}`, note)
+    return fetch(`https://polar-dawn-63323.herokuapp.com/blogs/${id}`, note)
     .then((response) => response.json())
     .then((responseJson)=>{
       this.getNotes
@@ -69,7 +73,7 @@ export default class App extends Component{
   }
 
   deletePost= async (id) => {
-    return fetch(`https://polar-dawn-63323.herokuapp.com/blogs${id}`)
+    return fetch(`https://polar-dawn-63323.herokuapp.com/blogs/${id}`)
     .then((response) => response.json())
     .then((responseJson)=>{
       this.getNotes
@@ -84,7 +88,7 @@ export default class App extends Component{
       <NativeRouter>
         <Route exact path='/' render={(props) => <Notes {...props} notes={this.state.dataSource} delete={this.delete}/>}/>
         <Route path='/addNote'render={(props)=> <Add {...props}  add={this.addNote}/>}/>
-        <Route path='/:id' render={(props)=> <Note {...props} delete={this.delete} update={this.updateNote}/>}/>
+        <Route path='/:id' render={(props)=> <Note {...props} delete={this.delete} update={this.updateNote} notes={this.state.notes}/>}/>
       </NativeRouter>
     );
   }

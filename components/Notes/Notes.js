@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, FlatList, ScrollView, ActivityIndicator,ListItem } from 'react-native';
 import { Link } from "react-router-native";
+import Navbar from '../Navbar/Navbar.js'
 
 const Notes = (props) => {
     return (
@@ -8,9 +9,10 @@ const Notes = (props) => {
             <FlatList
             data={props.notes}
             renderItem={({item}) =>
-            <Link to={`${item.id}`}><Text>{item.desc}, {item.header}</Text></Link>
+            <Link to={`${item.id}`}><Text>{item.header}</Text></Link>
             }
             />
+            <Navbar add={props.addNote}/>
     </View>
     );
 }
