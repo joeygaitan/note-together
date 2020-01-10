@@ -48,7 +48,6 @@ export default class App extends Component{
   }
 
   addNote = async (note) => {
-    console.log("here",note)
     return fetch(`https://polar-dawn-63323.herokuapp.com/blogs`,{
       method:'POST',
       headers:{ Accept: 'application/json',
@@ -56,10 +55,8 @@ export default class App extends Component{
       body: JSON.stringify(note)
     })
     .then((response) => {
-      console.log(response)
       return response.json()})
     .then((responseJSON) => {
-        console.log("inside the post request",responseJSON);
         this.getNotes()
       })
       .catch((error) =>{
@@ -86,7 +83,8 @@ export default class App extends Component{
     return fetch(`https://polar-dawn-63323.herokuapp.com/blogs/${id}`,{
       method:'DELETE',
       headers:{
-
+       Accept: 'application/json',
+      'Content-Type': 'application/json'
       }
     })
     .then((response) => response.json())
