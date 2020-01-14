@@ -1,5 +1,9 @@
 ### First React Native Application
 
+#### Future Goals
+* Electron desktop application
+* React Native phone application 
+
 #### Install Process
 1. Have node installed
 

@@ -61,20 +61,20 @@ class Note extends Component{
         return (
         <View style={styles}> 
             <TextInput
-            style={{height: 40,paddingTop:100,paddingLeft:20}}
+            style={{height: 40,paddingTop:100,paddingLeft:20,color:'black',height:50,alignContent:'center'}}
             placeholder={this.state.header}
             onChangeText={(text) => this.setState({header: text})}
             value={this.state.text}
             />
             <TextInput
-            style={{height: 40,paddingTop:100,paddingLeft:20}}
+            style={{height: 40,paddingTop:100,paddingLeft:20,color:'black',height:50,alignContent:'center'}}
             placeholder={this.state.desc}
             onChangeText={(text) => this.setState({desc: text})}
             value={this.state.text}
             />
             <Button style={{height: 40,paddingTop:30,paddingLeft:20}}title={"Done"}onPress={this.onDone}/>
             <Button style={{height: 40,paddingTop:30,paddingLeft:20}}title={"Delete"}onPress={this.onDone}/>
-            </View>
+        </View>
             );
     }
 }

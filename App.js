@@ -1,24 +1,14 @@
 //libaries
 import React, {Component} from 'react';
+//react tags
 import { StyleSheet, Text, View, Button, FlatList, ScrollView, ActivityIndicator,ListItem } from 'react-native';
+//react router native
 import { NativeRouter, Route, Link } from "react-router-native";
 
 //components
 import Notes from './components/Notes/Notes';
 import Note from './components/Note/Note.js';
-import Navbar from './components/Navbar/Navbar';
 import Add from './components/NewNote/Add';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-
 
 export default class App extends Component{
 

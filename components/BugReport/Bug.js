@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, FlatList, ScrollView, ActivityIndicator,ListItem } from 'react-native';
+import Reportbug from './reportbug.svg';
 
 class Bug extends Component {
     constructor(props) {
@@ -8,7 +9,10 @@ class Bug extends Component {
     }
     render() {
         return (
-            
+            <View>
+                <Reportbug/>
+                <Text>Hello</Text>
+            </View>
         );
     }
 }
